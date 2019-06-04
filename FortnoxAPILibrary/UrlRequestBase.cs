@@ -151,7 +151,8 @@ namespace FortnoxAPILibrary
             else if (currentRequestsPerSecond >= MAX_REQUESTS_PER_SECOND)
             {
                 // Wait out remainder of current second
-                Thread.Sleep(Convert.ToInt32((double)1000.0 - (DateTime.UtcNow - firstRequest).TotalMilliseconds));
+                if ((DateTime.UtcNow - firstRequest).TotalMilliseconds < 1000 && (DateTime.UtcNow - firstRequest).TotalMilliseconds > 0)
+                    Thread.Sleep(Convert.ToInt32((double)1000.0 - (DateTime.UtcNow - firstRequest).TotalMilliseconds));
                 reset = true;
             }
 
